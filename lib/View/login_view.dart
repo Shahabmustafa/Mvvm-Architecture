@@ -23,6 +23,12 @@ class _LoginPageState extends State<LoginPage> {
   ValueNotifier<bool> _obscurePassword = ValueNotifier<bool>(true);
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
   Widget build(BuildContext context) {
     final _authViewModel = Provider.of<AuthViewModel>(context);
     final height = MediaQuery.of(context).size.height * 1;
