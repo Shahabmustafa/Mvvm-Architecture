@@ -17,24 +17,27 @@ class _HomeScreenState extends State<HomeScreen> {
     final usermodelview = Provider.of<UserViewModel>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Screen'),
+        actions: [
+          InkWell(
+            onTap: (){
+              usermodelview.remove().then((value){
+                Navigator.pushNamed(context, RoutesName.Login);
+              },
+              );
+            },
+            child: Center(child: Text('LogOut')),
+          ),
+          SizedBox(
+            width: 10.0,
+          ),
+        ],
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Center(
-            child: RoundButton(
-              title: 'Log Out',
-              onPress: (){
-                usermodelview.remove().then((value){
-                  Navigator.pushNamed(context, RoutesName.Login);
-                  },
-                );
-              },
-            ),
-          )
+
         ],
       ),
     );
