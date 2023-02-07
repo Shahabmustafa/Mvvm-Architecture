@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../Utls/utls.dart';
-import '../View_Model/auth_view_model.dart';
+import '../View_Model/Services/auth_view_model.dart';
 import '../res/component/round_button.dart';
 
 class SignUpView extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mvvvm_architecture/Utls/routes/route_name.dart';
 import 'package:mvvvm_architecture/Utls/utls.dart';
-import 'package:mvvvm_architecture/View_Model/auth_view_model.dart';
+import 'package:mvvvm_architecture/View_Model/Services/auth_view_model.dart';
 import 'package:mvvvm_architecture/res/component/round_button.dart';
 import 'package:provider/provider.dart';
 
@@ -36,6 +36,7 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         title: Text('Login'),
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
