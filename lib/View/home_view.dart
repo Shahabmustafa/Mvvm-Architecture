@@ -48,11 +48,39 @@ class _HomeScreenState extends State<HomeScreen> {
           builder: (context,value,_){
           switch (value.photoList.status){
             case Status.Loading:
-              return CircularProgressIndicator();
+              return Center(child: const CircularProgressIndicator());
             case Status.Error:
-              return Text('Error');
+              return Center(child: Text('Error'));
             case Status.Complete:
-              return Text('Data');
+              return ListView.builder(
+                itemCount: value.photoList.data!.data!.length,
+                itemBuilder: (context,index){
+                  return Card(
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: NetworkImage((value.photoList.data!.data![index].avatar.toString())),
+                        radius: 30.0,
+                      ),
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Id: ${(value.photoList.data!.data![index].id.toString())}'),
+                          Row(
+                            children: [
+                              Text('Name : ${value.photoList.data!.data![index].firstName.toString()}'),
+                              SizedBox(
+                                width: 5.0,
+                              ),
+                              Text(value.photoList.data!.data![index].lastName.toString()),
+                            ],
+                          ),
+                        ],
+                      ),
+                      subtitle: Text('Email: ${value.photoList.data!.data![index].email.toString()}'),
+                    )
+                  );
+                },
+              );
           }
           return Container();
           },
