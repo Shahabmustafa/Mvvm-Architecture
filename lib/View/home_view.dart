@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mvvvm_architecture/Data/response/status.dart';
 import 'package:mvvvm_architecture/Utls/routes/route_name.dart';
-import 'package:mvvvm_architecture/View_Model/user_view_model.dart';
-import 'package:mvvvm_architecture/res/component/round_button.dart';
+import 'package:mvvvm_architecture/View_Model/Services/home_view_model.dart';
+import 'package:mvvvm_architecture/View_Model/Services/user_view_model.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,7 +13,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  HomeViewViewModel homeViewViewModel = HomeViewViewModel();
   @override
+  void initState() {
+    // TODO: implement initState
+    homeViewViewModel.fetchPhotoListapi();
+    super.initState();
+  }
   Widget build(BuildContext context) {
     final usermodelview = Provider.of<UserViewModel>(context);
     return Scaffold(
@@ -27,18 +35,28 @@ class _HomeScreenState extends State<HomeScreen> {
             },
             child: Center(child: Text('LogOut')),
           ),
-          SizedBox(
+          const SizedBox(
             width: 10.0,
           ),
         ],
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-
-        ],
+      body: ChangeNotifierProvider<HomeViewViewModel>(
+        create: (BuildContext context) => homeViewViewModel,
+        child: Consumer<HomeViewViewModel>(
+          builder: (context,value,_){
+          switch (value.photoList.status){
+            case Status.Loading:
+              return CircularProgressIndicator();
+            case Status.Error:
+              return Text('Error');
+            case Status.Complete:
+              return Text('Data');
+          }
+          return Container();
+          },
+        ),
       ),
     );
   }

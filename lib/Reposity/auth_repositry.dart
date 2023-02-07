@@ -1,6 +1,6 @@
 import 'package:mvvvm_architecture/Data/network/BaseApiService.dart';
 import 'package:mvvvm_architecture/Data/network/NetworkApiServce.dart';
-import 'package:mvvvm_architecture/Utls/app_url.dart';
+import 'package:mvvvm_architecture/res/component/app_url.dart';
 
 class AuthRepositry{
   BaseApiService _apiService = NetworkApiService();
